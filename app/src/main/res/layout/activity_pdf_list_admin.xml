@@ -8,14 +8,14 @@
     android:background="@drawable/back01"
     tools:context=".PdfListAdminActivity">
 
-<!--    Toolbar-->
+    <!--    Toolbar-->
     <RelativeLayout
         android:id="@+id/toolbarRl"
         android:background="@drawable/shape_toolbar02"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize">
 
-<!--        Back button-->
+        <!--        Back button-->
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:layout_marginStart="10dp"
             android:padding="5dp"/>
 
-<!--        Title-->
+        <!--        Title-->
         <TextView
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_marginTop="8dp"
             android:textStyle="bold"/>
 
-<!--        Subtitle    -->
+        <!--        Subtitle    -->
         <TextView
             android:id="@+id/subTitleTv"
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
 
     </RelativeLayout>
 
-<!--    Search-->
+    <!--    Search-->
     <EditText
         android:id="@+id/searchEt"
         android:layout_width="match_parent"
@@ -66,7 +66,7 @@
         android:textColorHint="@color/grey02"
         android:textColor="@color/black"/>
 
-<!--    Pdf/Book list-->
+    <!--    Pdf/Book list-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/booksRv"
         android:layout_width="match_parent"
@@ -76,5 +76,5 @@
         app.layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/row_pdf_admin"
         />
-    
+
 </RelativeLayout>

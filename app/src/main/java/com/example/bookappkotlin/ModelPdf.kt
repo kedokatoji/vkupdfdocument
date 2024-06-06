@@ -2,10 +2,8 @@ package com.example.bookappkotlin
 
 class ModelPdf {
 
-    val category: String =""
-
     //variables
-    var uid:String =""
+    var uid:String = ""
     var id:String = ""
     var title:String = ""
     var description:String = ""
@@ -17,7 +15,8 @@ class ModelPdf {
 
     //empty constructor (required by firebase)
     constructor()
-    //parameterized contrsuctor
+
+    //parameterized constructor
     constructor(
         uid: String,
         id: String,
@@ -39,7 +38,6 @@ class ModelPdf {
         this.viewsCount = viewsCount
         this.downloadsCount = downloadsCount
     }
-
 
 
 

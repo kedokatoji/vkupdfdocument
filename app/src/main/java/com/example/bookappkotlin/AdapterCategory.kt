@@ -78,8 +78,9 @@ class AdapterCategory : RecyclerView.Adapter<AdapterCategory.HolderCategory>, Fi
         //handle click, start pdf list admin activity, also pass pdf id, title
         holder.itemView.setOnClickListener {
             val intent = Intent(context, PdfListAdminActivity::class.java)
-            intent.putExtra("category", category)
             intent.putExtra("categoryId", id)
+            intent.putExtra("category", category)
+
             context.startActivity(intent)
         }
     }

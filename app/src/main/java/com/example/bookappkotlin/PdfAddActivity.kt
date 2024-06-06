@@ -419,9 +419,10 @@ class PdfAddActivity : AppCompatActivity() {
         hashMap["id"] = "$timestamp"
         hashMap["title"] = "$title"
         hashMap["description"] = "$description"
-        hashMap["category"] = "$category"
+        hashMap["categoryId"] = "$selectedCategoryID"
         hashMap["url"] = "$uploadedPdfUrl"
         hashMap["timestamp"] = timestamp
+        hashMap["viewsCount"] = 0
         hashMap["downloadsCount"] = 0
 
         //db reference DB > Book > Book ID > Book info
