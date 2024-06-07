@@ -1,11 +1,14 @@
 package com.example.bookappkotlin
 
 import android.app.Application
+import android.app.ProgressDialog
+import android.content.Context
 import android.text.format.DateFormat
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -113,15 +116,23 @@ class MyApplication : Application() {
                         .spacing(0) //spacing between pages
                         .swipeHorizontal(false) //horizontal swipe
                         .enableSwipe(false)
-                        .onError{ t ->
+                        .onError { t ->
                             progressBar.visibility = View.INVISIBLE
-                            Log.d(TAG, "loadPdfFromUrlSinglePage: Error loading PDF: ${t.message}", t)
+                            Log.d(
+                                TAG,
+                                "loadPdfFromUrlSinglePage: Error loading PDF: ${t.message}",
+                                t
+                            )
                         }
-                        .onPageError{ page, t ->
+                        .onPageError { page, t ->
                             progressBar.visibility = View.INVISIBLE
-                            Log.d(TAG, "loadPdfFromUrlSinglePage: Error loading page $page: ${t.message}", t)
+                            Log.d(
+                                TAG,
+                                "loadPdfFromUrlSinglePage: Error loading page $page: ${t.message}",
+                                t
+                            )
                         }
-                        .onLoad{ nbPages ->
+                        .onLoad { nbPages ->
                             Log.d(TAG, "loadPdfFromUrlSinglePage: Page: $nbPages")
                             progressBar.visibility = View.INVISIBLE
                             //if pagesTv param is not null then set page numbers
@@ -156,6 +167,60 @@ class MyApplication : Application() {
                         categoryTv.text = "Category"
                     }
                 })
+        }
+
+        fun deleteBook(context: Context, bookId: String, bookUrl: String, bookTitle: String) {
+            //param details
+            //1) context, used when require e.g. for progressdialog, toast
+            //2) bookId, to delete book from db
+            //3) bookUrl, delete book from firebase storage
+            //4) bookTitle, show in dialog etc
+
+            val TAG = "DELETE_BOOK_TAG"
+
+            Log.d(TAG, "deleteBook: deleting...")
+
+            //progress dialog
+            val progressDialog = ProgressDialog(context)
+            progressDialog.setTitle("Please wait")
+            progressDialog.setMessage("Deleting $bookTitle...")
+            progressDialog.setCanceledOnTouchOutside(false)
+            progressDialog.show()
+
+            Log.d(TAG, "deleteBook: Deleting from storage...")
+            val storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(bookUrl)
+            storageReference.delete()
+                .addOnSuccessListener {
+                    Log.d(TAG, "deleteBook: Deleted from storage")
+                    Log.d(TAG, "deleteBook: Deleting from db now...")
+
+                    val ref = FirebaseDatabase.getInstance().getReference("Books")
+                    ref.child(bookId)
+                        .removeValue()
+                        .addOnSuccessListener {
+                            //deleted from db
+
+                            progressDialog.dismiss()
+                            Toast.makeText(context, "Deleted successfully...", Toast.LENGTH_SHORT).show()
+                            Log.d(TAG, "deleteBook: Deleted from db")
+                        }
+                        .addOnFailureListener { e ->
+                            //failed to delete from db
+                            progressDialog.dismiss()
+                            Log.d(TAG, "deleteBook: Failed to delete from db due to ${e.message}")
+
+                            Toast.makeText(context, "Failed to delete from db due to ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+
+                .addOnFailureListener { e ->
+                    //failed to delete from storage
+                    Log.d(TAG, "deleteBook: Failed to delete from storage due to ${e.message}")
+                    Toast.makeText(context, "Failed to delete from due to ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+
+
         }
     }
 

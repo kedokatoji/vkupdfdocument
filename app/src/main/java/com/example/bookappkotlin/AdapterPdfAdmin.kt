@@ -120,7 +120,9 @@
 //}
 package com.example.bookappkotlin
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -136,7 +138,7 @@ class AdapterPdfAdmin(private var context: Context, var pdfArrayList: ArrayList<
 
     // filter list and filter
     private var filterList: ArrayList<ModelPdf>
-    var filter: FilterPdfAdmin? = null
+    private var filter: FilterPdfAdmin? = null
 
     init {
         this.filterList = pdfArrayList
@@ -177,7 +179,40 @@ class AdapterPdfAdmin(private var context: Context, var pdfArrayList: ArrayList<
 
         // load pdf size
         MyApplication.loadPdfSize(pdfUrl, title, holder.sizeTv)
-        // lets create an application class that will contain the functions that will be used multiple places in app
+
+
+        //handle click, show dialog with option 1) editbook, 2) delete book
+        holder.moreBtn.setOnClickListener {
+            moreOptionDialog(model, holder)
+        }
+    }
+
+    private fun moreOptionDialog(model: ModelPdf, holder: AdapterPdfAdmin.HolderPdfAdmin) {
+        //get id, url, title of book
+        val bookId = model.id
+        val bookUrl = model.url
+        val bookTitle = model.title
+
+        //option to show in dialog
+        val options = arrayOf("Edit", "Delete")
+
+        //alert dialog
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Choose Option")
+            .setItems(options) {dialog, position ->
+                //handle item click
+                if (position==0){
+                    //edit is clicked
+                    val intent = Intent(context, PdfEditActivity::class.java)
+                    intent.putExtra("bookId", bookId) //passed bookId , will be used to edit the book
+                    context.startActivity(intent)
+                }
+                else if (position ==1){
+                    //delete is clicked
+                    MyApplication.deleteBook(context, bookId, bookUrl, bookTitle)
+                }
+            }
+            .show()
     }
 
     override fun getItemCount(): Int {
