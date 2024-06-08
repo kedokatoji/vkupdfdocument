@@ -17,6 +17,10 @@ class PdfDetailActivity : AppCompatActivity() {
     //book id
     private var bookId = ""
 
+    //get from firebase
+    private var bookTitle = ""
+    private var bookUrl = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,11 @@ class PdfDetailActivity : AppCompatActivity() {
             intent.putExtra("bookId", bookId)
             startActivity(intent)
         }
+
+        //handle click, download book/pdf
+        binding.downloadBookBtn.setOnClickListener {
+            //first
+        }
     }
 
     private fun loadBookDetails() {
@@ -54,9 +63,9 @@ class PdfDetailActivity : AppCompatActivity() {
                     val description = "${snapshot.child("description").value}"
                     val downloadsCount = "${snapshot.child("downloadsCount").value}"
                     val timestamp = "${snapshot.child("timestamp").value}"
-                    val title = "${snapshot.child("title").value}"
+                    bookTitle = "${snapshot.child("title").value}"
                     val uid = "${snapshot.child("uid").value}"
-                    val url = "${snapshot.child("url").value}"
+                    bookUrl = "${snapshot.child("url").value}"
                     val viewsCount = "${snapshot.child("viewsCount").value}"
 
                     //format date
@@ -67,17 +76,17 @@ class PdfDetailActivity : AppCompatActivity() {
 
                     //load pdf thumbnail, pages count
                     MyApplication.loadPdfFromUrlSinglePage(
-                        "$url",
-                        "$title",
+                        "$bookUrl",
+                        "$bookTitle",
                         binding.pdfView,
                         binding.progressBar,
                         binding.pagesTv
                     )
                     //load pdf size
-                    MyApplication.loadPdfSize("$url", "$title", binding.sizeTv)
+                    MyApplication.loadPdfSize("$bookUrl", "$bookTitle", binding.sizeTv)
 
                     //set data
-                    binding.titleTv.text = title
+                    binding.titleTv.text = bookTitle
                     binding.descriptionTv.text = description
                     binding.viewsTv.text = viewsCount
                     binding.downloadsTv.text = downloadsCount
