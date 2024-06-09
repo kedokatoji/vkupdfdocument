@@ -60,6 +60,7 @@ dependencies {
 
     //glide, image processing lib
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.google.android.material:material:1.5.0-alpha05")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
