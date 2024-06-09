@@ -113,7 +113,8 @@ class PdfDetailActivity : AppCompatActivity() {
                 //user is logged in, can do favorite functionality
                 if (isInMyFavorites){
                     //already in fav, remove
-                    removeFromFavorite()
+
+                    MyApplication.removeFromFavorite(this, bookId)
                 }
                 else {
                     //not in fav, add
@@ -339,22 +340,5 @@ class PdfDetailActivity : AppCompatActivity() {
             }
     }
 
-    private fun removeFromFavorite() {
-        Log.d(TAG, "removeFromFavorite: Removing from fav")
 
-        //remove from db
-        val ref = FirebaseDatabase.getInstance().getReference("Users")
-        ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
-            .removeValue()
-            .addOnSuccessListener {
-                //removed from fav
-                Log.d(TAG, "removeFromFavorite: Removed from fav")
-                Toast.makeText(this, "Removed from favorite", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener { e ->
-                //failed to remove from fav
-                Log.d(TAG, "removeFromFavorite: Failed to remove from fav due to ${e.message}")
-                Toast.makeText(this, "Failed to remove from favorite", Toast.LENGTH_SHORT).show()
-            }
-    }
 }

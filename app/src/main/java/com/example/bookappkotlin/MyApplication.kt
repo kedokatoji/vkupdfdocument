@@ -10,6 +10,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -254,6 +255,28 @@ class MyApplication : Application() {
 
                     }
                 })
+        }
+
+        public fun removeFromFavorite(context: Context, bookId: String) {
+            val TAG = "REMOVE_FAV_TAG"
+            Log.d(TAG, "removeFromFavorite: Removing from fav")
+
+            val firebaseAuth = FirebaseAuth.getInstance()
+
+            //remove from db
+            val ref = FirebaseDatabase.getInstance().getReference("Users")
+            ref.child(firebaseAuth.uid!!).child("Favorites").child(bookId)
+                .removeValue()
+                .addOnSuccessListener {
+                    //removed from fav
+                    Log.d(TAG, "removeFromFavorite: Removed from fav")
+                    Toast.makeText(context, "Removed from favorite", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { e ->
+                    //failed to remove from fav
+                    Log.d(TAG, "removeFromFavorite: Failed to remove from fav due to ${e.message}")
+                    Toast.makeText(context, "Failed to remove from favorite", Toast.LENGTH_SHORT).show()
+                }
         }
     }
 
