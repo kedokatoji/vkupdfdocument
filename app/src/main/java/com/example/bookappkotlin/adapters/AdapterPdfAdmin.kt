@@ -118,7 +118,7 @@
 //        val moreBtn = binding.moreBtn
 //    }
 //}
-package com.example.bookappkotlin
+package com.example.bookappkotlin.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -129,7 +129,12 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookappkotlin.filters.FilterPdfAdmin
+import com.example.bookappkotlin.MyApplication
+import com.example.bookappkotlin.activities.PdfDetailActivity
+import com.example.bookappkotlin.activities.PdfEditActivity
 import com.example.bookappkotlin.databinding.RowPdfAdminBinding
+import com.example.bookappkotlin.models.ModelPdf
 
 class AdapterPdfAdmin(private var context: Context, var pdfArrayList: ArrayList<ModelPdf>) : RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>(), Filterable {
 
@@ -175,7 +180,13 @@ class AdapterPdfAdmin(private var context: Context, var pdfArrayList: ArrayList<
         MyApplication.loadCategory(categoryId, holder.categoryTv)
 
         // we don't need page number here, pass null for page number
-        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, title, holder.pdfView, holder.progressBar, null)
+        MyApplication.loadPdfFromUrlSinglePage(
+            pdfUrl,
+            title,
+            holder.pdfView,
+            holder.progressBar,
+            null
+        )
 
         // load pdf size
         MyApplication.loadPdfSize(pdfUrl, title, holder.sizeTv)
@@ -194,7 +205,7 @@ class AdapterPdfAdmin(private var context: Context, var pdfArrayList: ArrayList<
         }
     }
 
-    private fun moreOptionDialog(model: ModelPdf, holder: AdapterPdfAdmin.HolderPdfAdmin) {
+    private fun moreOptionDialog(model: ModelPdf, holder: HolderPdfAdmin) {
         //get id, url, title of book
         val bookId = model.id
         val bookUrl = model.url

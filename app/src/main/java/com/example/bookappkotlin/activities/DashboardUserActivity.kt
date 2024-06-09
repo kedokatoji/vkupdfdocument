@@ -1,14 +1,17 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.example.bookappkotlin.BooksUserFragment
 import com.example.bookappkotlin.databinding.ActivityDashboardUserBinding
+import com.example.bookappkotlin.models.ModelCategory
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -43,6 +46,11 @@ class DashboardUserActivity : AppCompatActivity() {
             firebaseAuth.signOut()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
+        }
+
+        //handle click, open profile
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
 
@@ -166,12 +174,20 @@ class DashboardUserActivity : AppCompatActivity() {
         if (firebaseUser == null) {
             //user not logged in, user can stay in user dashboard without login too
             binding.subTitleTv.text = "Not Logged in"
+
+            //hide profile, logout
+            binding.profileBtn.visibility = View.GONE
+            binding.logoutBtn.visibility = View.GONE
         }
         else {
             //logged in, get and show user info
             val email = firebaseUser.email
             //set to textview of toolbar
             binding.subTitleTv.text = email
+
+            //show profile, logout
+            binding.profileBtn.visibility = View.VISIBLE
+            binding.logoutBtn.visibility = View.VISIBLE
         }
     }
 }

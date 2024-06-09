@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.adapters
 
 import android.app.AlertDialog
 import android.content.Context
@@ -12,6 +12,9 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookappkotlin.filters.FilterCategory
+import com.example.bookappkotlin.models.ModelCategory
+import com.example.bookappkotlin.activities.PdfListAdminActivity
 import com.example.bookappkotlin.databinding.RowCategoryBinding
 import com.google.firebase.database.FirebaseDatabase
 

@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.Manifest
 import android.app.ProgressDialog
@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.bookappkotlin.Constants
+import com.example.bookappkotlin.MyApplication
+import com.example.bookappkotlin.R
 import com.example.bookappkotlin.databinding.ActivityPdfDetailBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot

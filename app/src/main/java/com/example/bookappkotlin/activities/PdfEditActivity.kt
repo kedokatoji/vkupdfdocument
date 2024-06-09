@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.app.AlertDialog
 import android.app.ProgressDialog

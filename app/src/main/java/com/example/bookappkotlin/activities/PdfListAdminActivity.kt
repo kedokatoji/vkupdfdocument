@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.os.Bundle
 import android.text.Editable
@@ -6,7 +6,9 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.bookappkotlin.adapters.AdapterPdfAdmin
 import com.example.bookappkotlin.databinding.ActivityPdfListAdminBinding
+import com.example.bookappkotlin.models.ModelPdf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase

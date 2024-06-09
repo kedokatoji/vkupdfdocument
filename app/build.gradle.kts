@@ -58,6 +58,8 @@ dependencies {
     implementation("com.github.barteksc:android-pdf-viewer:2.8.2")
     implementation(libs.androidx.media3.common)
 
+    //glide, image processing lib
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

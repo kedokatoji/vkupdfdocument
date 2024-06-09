@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,11 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookappkotlin.filters.FilterPdfUser
+import com.example.bookappkotlin.MyApplication
+import com.example.bookappkotlin.activities.PdfDetailActivity
 import com.example.bookappkotlin.databinding.RowPdfUserBinding
+import com.example.bookappkotlin.models.ModelPdf
 
 class AdapterPdfUser : RecyclerView.Adapter<AdapterPdfUser.HolderPdfUser>, Filterable{
 

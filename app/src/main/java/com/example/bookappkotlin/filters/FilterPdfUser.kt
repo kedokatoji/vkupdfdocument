@@ -1,6 +1,8 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.filters
 
 import android.widget.Filter
+import com.example.bookappkotlin.adapters.AdapterPdfUser
+import com.example.bookappkotlin.models.ModelPdf
 
 class FilterPdfUser : Filter {
     //arraylist in which we want to search

@@ -258,7 +258,7 @@
 //        }
 //        )
 //    }
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -272,6 +272,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.bookappkotlin.models.ModelCategory
 import com.example.bookappkotlin.databinding.ActivityPdfAddBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth

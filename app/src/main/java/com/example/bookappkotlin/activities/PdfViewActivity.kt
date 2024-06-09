@@ -1,4 +1,4 @@
-package com.example.bookappkotlin
+package com.example.bookappkotlin.activities
 
 import android.os.Bundle
 import android.util.Log
