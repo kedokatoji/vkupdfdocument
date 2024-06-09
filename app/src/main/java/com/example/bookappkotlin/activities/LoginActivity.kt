@@ -45,6 +45,10 @@ class LoginActivity : AppCompatActivity() {
         binding.loginBtn.setOnClickListener {
             validateData()
         }
+
+        binding.forgotTv.setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
     }
 
     private var email = ""
@@ -58,11 +62,9 @@ class LoginActivity : AppCompatActivity() {
         //2)validate data
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(this, "Invalid email format...", Toast.LENGTH_SHORT).show()
-        }
-        else if (password.isEmpty()) {
+        } else if (password.isEmpty()) {
             Toast.makeText(this, "Enter password...", Toast.LENGTH_SHORT).show()
-        }
-        else {
+        } else {
             loginUser()
         }
     }
@@ -74,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnSuccessListener {
-                 //login success
+                //login success
                 checkUser()
             }
             .addOnFailureListener { e ->
@@ -93,20 +95,24 @@ class LoginActivity : AppCompatActivity() {
         val firebaseUser = firebaseAuth.currentUser!!
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         ref.child(firebaseUser.uid)
-            .addListenerForSingleValueEvent(object: ValueEventListener{
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     progressDialog.dismiss()
 
                     //get user type e.g. user or admin
                     val userType = snapshot.child("userType").value
-                    if (userType == "user"){
+                    if (userType == "user") {
                         //its simple user, open user dashboard
                         startActivity(Intent(this@LoginActivity, DashboardUserActivity::class.java))
                         finish()
-                    }
-                    else if (userType == "admin"){
+                    } else if (userType == "admin") {
                         //its admin, open admin dashboard
-                        startActivity(Intent(this@LoginActivity, DashboardAdminActivity::class.java))
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                DashboardAdminActivity::class.java
+                            )
+                        )
                         finish()
                     }
                 }
