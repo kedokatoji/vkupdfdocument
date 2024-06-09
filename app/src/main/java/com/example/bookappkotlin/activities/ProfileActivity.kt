@@ -1,7 +1,10 @@
 package com.example.bookappkotlin.activities
 
+import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.bookappkotlin.MyApplication
@@ -10,6 +13,7 @@ import com.example.bookappkotlin.adapters.AdapterPdfFavorite
 import com.example.bookappkotlin.databinding.ActivityProfileBinding
 import com.example.bookappkotlin.models.ModelPdf
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -24,13 +28,33 @@ class ProfileActivity : AppCompatActivity() {
     //firebase auth
     private lateinit var firebaseAuth: FirebaseAuth
 
+    //firebase current user
+    private lateinit var firebaseUser: FirebaseUser
+
     //arraylist to hold books
     private lateinit var booksArrayList: ArrayList<ModelPdf>
     private lateinit var adapterPdfFavorite: AdapterPdfFavorite
+
+    //progress dialog
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //reset to defalut values
+        binding.accountTypeTv.text = "N/A"
+        binding.memberDateTv.text = "N/A"
+        binding.favoriteBookCountTv.text = "N/A"
+        binding.accountStatusTv.text = "N/A"
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        firebaseUser = firebaseAuth.currentUser!!
+
+        //init/setup progress dialog
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Please wait")
+        progressDialog.setCanceledOnTouchOutside(false)
 
         firebaseAuth = FirebaseAuth.getInstance()
         loadUserInfo()
@@ -39,6 +63,18 @@ class ProfileActivity : AppCompatActivity() {
         //handle click, go back
         binding.backBtn.setOnClickListener {
             onBackPressed()
+        }
+
+        //handle click, verify user if not
+        binding.accountStatusTv.setOnClickListener {
+            if (firebaseUser.isEmailVerified){
+                //user is verified
+                Toast.makeText(this, "Account is already verified", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                //user is not verified
+                emailVerificationDialog()
+            }
         }
 
         //handle click, open edit profile
@@ -50,7 +86,52 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
+    private fun emailVerificationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Verify Email")
+            .setMessage("Are you sure you want to send verification email? ${firebaseUser.email}")
+            .setPositiveButton("SEND"){d, e->
+                sendEmailVerification()
+
+            }
+            .setNegativeButton("CANCEL"){d, e->
+                d.dismiss()
+            }
+            .show()
+    }
+
+    private fun sendEmailVerification() {
+        //show progress dialog
+        progressDialog.setMessage("Sending email verification instructions to email ${firebaseUser.email}")
+        progressDialog.show()
+
+        //send instruction
+        firebaseUser.sendEmailVerification()
+            .addOnSuccessListener {
+                //dismiss progress dialog
+                progressDialog.dismiss()
+                Toast.makeText(this, "Verification email sent to ${firebaseUser.email}", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e->
+                //dismiss progress dialog
+                progressDialog.dismiss()
+                Toast.makeText(this, "Fail to send due to ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
     private fun loadUserInfo() {
+
+        //check if user is verified or not
+
+        if (firebaseUser.isEmailVerified){
+            //email is verified
+            binding.accountStatusTv.text = "Email is verified"
+        }
+        else{
+            //email is not verified
+            binding.accountStatusTv.text = "Email is not verified"
+        }
+
         //db reference to load user info
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         ref.child(firebaseAuth.uid!!)
