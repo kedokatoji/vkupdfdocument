@@ -38,7 +38,7 @@
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add a New Book"
+            android:text="Thêm PDF mới"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/iconIv"
@@ -77,7 +77,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edittext01"
             android:drawableStart="@drawable/ic_pdf_grey"
-            android:hint="Book Title"
+            android:hint="Tên PDF"
             android:drawablePadding="10dp"
             android:inputType="textPersonName|textCapWords"
             android:padding="10dp"
@@ -106,7 +106,7 @@
             android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHint="@color/grey01"
-            android:hint="Book Description"
+            android:hint="Mô tả PDF"
             android:inputType="textMultiLine|textCapSentences"
             android:textSize="16sp"
             android:drawableStart="@drawable/ic_pdf_grey"
@@ -128,7 +128,7 @@
         android:drawableEnd="@drawable/ic_down_gray"
         android:drawablePadding="10dp"
         android:padding="10dp"
-        android:hint="Book Category"
+        android:hint="Môn học"
         android:gravity="center_vertical"
         android:textColor="@color/black"
         android:textColorHint="@color/grey01"
@@ -143,8 +143,9 @@
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginTop="10dp"
-        android:text="Upload"
-        android:textColor="@color/white"/>
+        android:text="Tải lên"
+        android:textColor="@color/white"
+        />
 
 
 </RelativeLayout>

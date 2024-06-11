@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:text="Edit Profile"
+            android:text="Chỉnh sửa thông tin cá nhân"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -74,7 +74,7 @@
                 android:inputType="textPersonName|textCapWords"
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey01"
-                android:hint="Name"/>
+                android:hint="Tên"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/nameTil"
             android:textColor="@color/white"
-            android:text="Update"
+            android:text="Cập nhật"
             android:background="@drawable/shape_button01"
             android:layout_marginTop="20dp"/>
 

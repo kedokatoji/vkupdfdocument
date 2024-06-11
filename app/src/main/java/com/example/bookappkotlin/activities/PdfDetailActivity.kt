@@ -417,7 +417,7 @@ class PdfDetailActivity : AppCompatActivity() {
                             0,
                             0
                         )
-                        binding.favoriteBtn.text = "Remove Favorite"
+                        binding.favoriteBtn.text = "Hủy yêu thích"
                     }
                     else {
                         //not available in fav
@@ -429,7 +429,7 @@ class PdfDetailActivity : AppCompatActivity() {
                             0,
                             0
                         )
-                        binding.favoriteBtn.text = "Add Favorite"
+                        binding.favoriteBtn.text = "Yêu thích"
                     }
                 }
 

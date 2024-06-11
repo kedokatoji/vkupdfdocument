@@ -23,7 +23,7 @@
         android:layout_below="@id/iconIv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Welcome to Document App Mobile"
+        android:text="Chào mừng bạn đến với VKU PDF"
         android:textColor="@color/black"
         android:textSize="16sp"
         />
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_button01"
-        android:text="LOGIN"
+        android:text="ĐĂNG NHẬP"
         android:layout_above="@id/skipBtn"
         android:textColor="@color/white"/>
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="CONTINUE WITHOUT LOGIN"
+        android:text="TIẾP TỤC DÙNG THỬ"
         android:textColor="#6500ec"
         android:background="@drawable/shape_button02"/>
 

@@ -15,7 +15,7 @@
         android:layout_margin="10dp"
         android:background="@color/white"
         android:drawableStart="@drawable/ic_search_grey"
-        android:hint="Search"
+        android:hint="Tìm kiếm"
         android:padding="10dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey01"/>

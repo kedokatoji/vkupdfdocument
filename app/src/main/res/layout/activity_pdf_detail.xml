@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Book Details"
+            android:text="Thông tin PDF"
             android:textColor="@color/white"
             android:textStyle="bold" />
 
@@ -257,7 +257,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Comments"
+                    android:text="Bình luận"
                     android:padding="5dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"/>
@@ -306,7 +306,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_book_white"
-            android:text="Read"
+            android:text="Đọc PDF"
             android:textSize="10sp" />
 
         <!--        BUtton: Download book (download forder)-->
@@ -316,7 +316,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_download_white"
-            android:text="Download"
+            android:text="Tải xuống"
             android:textSize="10sp" />
 
         <!--        Button: Add/remove favorite-->
@@ -326,7 +326,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_favorite_border_white"
-            android:text="Add Favorite"
+            android:text="Yêu thích"
             android:textSize="10sp" />
 
     </LinearLayout>

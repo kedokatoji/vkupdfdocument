@@ -39,7 +39,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Create New Account"
+            android:text="Tạo tài khoản mới"
             android:textColor="@color/white"
             android:textSize="28sp" />
     </RelativeLayout>
@@ -68,7 +68,7 @@
                     android:background="@drawable/shape_edittext01"
                     android:drawableStart="@drawable/ic_person_grey"
                     android:drawablePadding="10dp"
-                    android:hint="Name"
+                    android:hint="Tên"
                     android:inputType="textPersonName|textCapWords"
                     android:padding="10dp"
                     android:textColor="@color/black"
@@ -158,7 +158,7 @@
                 android:layout_below="@id/cPasswordTil"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/shape_button01"
-                android:text="Register"
+                android:text="Đăng ký"
                 android:textColor="@color/white"/>
 
         </RelativeLayout>

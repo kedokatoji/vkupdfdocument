@@ -41,7 +41,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-condensed"
             android:scrollbarSize="28sp"
-            android:text="Add a new Category"
+            android:text="Thêm môn học mới"
             android:textColor="@color/white"
             android:textSize="28sp"/>
 
@@ -65,7 +65,7 @@
             android:background="@drawable/shape_edittext01"
             android:drawableStart="@drawable/ic_category_grey"
             android:drawablePadding="10dp"
-            android:hint="Category Title"
+            android:hint="Tên môn học"
             android:inputType="textPersonName|textCapSentences"
             android:padding="10dp"
             android:textColor="@color/black"
@@ -84,7 +84,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_button01"
-        android:text="Submit"
+        android:text="Xác nhận"
         android:textColor="@color/white"/>
 
 

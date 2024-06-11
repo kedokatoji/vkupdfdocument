@@ -33,7 +33,7 @@
 <!--        Title-->
         <TextView
             android:id="@+id/toolbarTitleTv"
-            android:text="Profile"
+            android:text="Thông tin cá nhân"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
@@ -174,7 +174,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favorite Books"
+                android:text="Sách yêu thích"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="12sp"
@@ -202,7 +202,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account Status"
+                android:text="Trạng thái"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="12sp"

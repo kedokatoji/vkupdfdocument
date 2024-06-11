@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:background="@drawable/shape_button01"
             android:minHeight="50dp"
-            android:text="+ Add Category"
+            android:text="+ Thêm môn học"
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
