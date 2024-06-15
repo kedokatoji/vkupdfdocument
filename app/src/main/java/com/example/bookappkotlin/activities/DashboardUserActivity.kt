@@ -34,12 +34,15 @@ class DashboardUserActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance()
         checkUser()
 
         setupWithViewPagerAdapter(binding.viewPager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
+
 
         //handle click, logout
         binding.logoutBtn.setOnClickListener {
@@ -166,6 +169,8 @@ class DashboardUserActivity : AppCompatActivity() {
             //add title that will be passed as parameter
             fragmentTitleList.add(title)
         }
+
+
     }
 
     private fun checkUser() {

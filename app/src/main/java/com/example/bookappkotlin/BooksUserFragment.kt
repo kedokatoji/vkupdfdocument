@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.bookappkotlin.adapters.AdapterPdfUser
 import com.example.bookappkotlin.databinding.FragmentBooksUserBinding
@@ -85,23 +84,24 @@ class BooksUserFragment : Fragment {
         }
 
         //search
-        binding.searchEt.addTextChangedListener { object : TextWatcher{
+        binding.searchEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                TODO("Not yet implemented")
+                // Do something before text changes
             }
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Filter data as text changes
                 try {
                     adapterPdfUser.filter.filter(s)
-                }
-                catch (e: Exception){
+                } catch (e: Exception) {
                     Log.d(TAG, "onTextChanged: SEARCH EXCEPTION: ${e.message}")
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {
-                TODO("Not yet implemented")
+                // Do something after text changes
             }
-        } }
+        })
 
 
         return binding.root
@@ -133,32 +133,66 @@ class BooksUserFragment : Fragment {
         })
     }
 
-    private fun loadMostViewedDownloadedBooks(orderBy: String) {
-        //init list
-        pdfArrayList = ArrayList()
-        val ref = FirebaseDatabase.getInstance().getReference("Books")
-        ref.orderByChild(orderBy).limitToLast(10) //load most viewed or most downloaded
-            .addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //clear list before adding data into it
-                pdfArrayList.clear()
-                for (ds  in snapshot.children){
-                    //get data
-                    val model = ds.getValue(ModelPdf::class.java)
-                    //add to list
-                    pdfArrayList.add(model!!)
-                }
-                //setup adapter
-                adapterPdfUser = AdapterPdfUser(context!!, pdfArrayList)
-                //set adapter to recyclerview
-                binding.booksRv.adapter = adapterPdfUser
+//    private fun loadMostViewedDownloadedBooks(orderBy: String) {
+//        //init list
+//        pdfArrayList = ArrayList()
+//        val ref = FirebaseDatabase.getInstance().getReference("Books")
+//        ref.orderByChild(orderBy).limitToLast(10) //load most viewed or most downloaded
+//            .addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                //clear list before adding data into it
+//                pdfArrayList.clear()
+//                for (ds  in snapshot.children){
+//                    //get data
+//                    val model = ds.getValue(ModelPdf::class.java)
+//                    //add to list
+//                    pdfArrayList.add(model!!)
+//                }
+//                //setup adapter
+//                adapterPdfUser = AdapterPdfUser(context!!, pdfArrayList)
+//                //set adapter to recyclerview
+//                binding.booksRv.adapter = adapterPdfUser
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//        })
+//    }
+private fun loadMostViewedDownloadedBooks(orderBy: String) {
+    //init list
+    pdfArrayList = ArrayList()
+    val ref = FirebaseDatabase.getInstance().getReference("Books")
+    ref.addValueEventListener(object : ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            //clear list before adding data into it
+            pdfArrayList.clear()
+            for (ds  in snapshot.children){
+                //get data
+                val model = ds.getValue(ModelPdf::class.java)
+                //add to list
+                pdfArrayList.add(model!!)
             }
-
-            override fun onCancelled(error: DatabaseError) {
-
+            //sort and limit the list
+            if (orderBy == "viewsCount") {
+                pdfArrayList.sortByDescending { it.viewsCount }
+            } else if (orderBy == "downloadsCount") {
+                pdfArrayList.sortByDescending { it.downloadsCount }
             }
-        })
-    }
+            if (pdfArrayList.size > 10) {
+                pdfArrayList = ArrayList(pdfArrayList.take(10))
+            }
+            //setup adapter
+            adapterPdfUser = AdapterPdfUser(context!!, pdfArrayList)
+            //set adapter to recyclerview
+            binding.booksRv.adapter = adapterPdfUser
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+
+        }
+    })
+}
 
     private fun loadCategorizedBooks() {
         //init list
@@ -186,6 +220,8 @@ class BooksUserFragment : Fragment {
                 }
             })
     }
+
+
 
 
 }

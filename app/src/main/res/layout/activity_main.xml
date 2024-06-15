@@ -23,7 +23,7 @@
         android:layout_below="@id/iconIv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Chào mừng bạn đến với VKU PDF"
+        android:text="Chào mừng đến với VKU DOCUMENT MOBILE APP"
         android:textColor="@color/black"
         android:textSize="16sp"
         />

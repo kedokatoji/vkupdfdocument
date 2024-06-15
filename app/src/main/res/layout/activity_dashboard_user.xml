@@ -53,9 +53,13 @@
             android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"/>
 
+
+
     </RelativeLayout>
 
 <!--    Tabs: Show Book Categories-->
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
